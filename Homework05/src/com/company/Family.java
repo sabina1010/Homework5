@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Family {
     public Human getMother() {
@@ -48,6 +49,21 @@ public class Family {
                 ", children=" + Arrays.deepToString(children) +
                 ", pet=" + pet +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Family family = (Family) o;
+        return Objects.equals(mother, family.mother) && Objects.equals(father, family.father) && Arrays.equals(children, family.children);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(mother, father);
+        result = 31 * result + Arrays.hashCode(children);
+        return result;
     }
 
     public Family(Human mother, Human father) {
@@ -119,3 +135,4 @@ public class Family {
 
 
 }
+
