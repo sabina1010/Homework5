@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Human {
     private String name;
@@ -27,6 +28,21 @@ public class Human {
                 ", iq=" + iq +
                 ", schedule=" + Arrays.toString(schedule) +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return year == human.year && Objects.equals(name, human.name) && Objects.equals(surname, human.surname) ;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(name, surname, year, iq, family);
+        result = 31 * result + Arrays.hashCode(schedule);
+        return result;
     }
 
     public Human(String name, String surname, int year) {
@@ -98,3 +114,4 @@ public class Human {
         this.schedule = schedule;
     }
 }
+
