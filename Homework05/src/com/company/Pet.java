@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Pet {
     private String species;
@@ -17,6 +18,19 @@ public class Pet {
                 ", trickLevel=" + getTrickLevel() +
                 ", habits=" + Arrays.toString(getHabits()) +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pet pet = (Pet) o;
+        return age == pet.age && trickLevel == pet.trickLevel && Objects.equals(species, pet.species) && Objects.equals(nickName, pet.nickName) && Arrays.equals(habits, pet.habits);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(species, nickName, age, trickLevel);
     }
 
     //empty const
@@ -90,3 +104,4 @@ public class Pet {
         this.habits = habits;
     }
 }
+
